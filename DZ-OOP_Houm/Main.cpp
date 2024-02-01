@@ -20,8 +20,7 @@ public:
 		void Add_count_human();
 	}
 	~Human() {
-		//delete[];
-		void Delete_count_human();
+		//void Delete_count_human();
 	}
 	
 	void ShowDataHuman() {
@@ -66,8 +65,10 @@ public:
 	}
 	void DelHuman(std::string str) {
 		for (auto H : _Humans) {
-			if (H.GetName() == str)
+			if (H.GetName() == str){
 				H.~Human();
+				
+			}
 			if (H.GetSecond_Name() == str)
 				H.~Human();
 		}
@@ -89,15 +90,11 @@ public:
 	void AddRoom(Room &room) {
 		_Rooms.push_back(room);
 	}
-	std::vector<Room>::iterator R = _Rooms.begin();
+	/*std::vector<Room>::iterator R = _Rooms.begin();
 	void DeleteRoom(int num) {
-		for (auto R : _Rooms) {
-			if (R.GetNumberRoom() == num)
-				R;
-
+		for (auto R : _Rooms) {	
 		}
-
-	}
+	}*/
 };
 
 int main() {
@@ -124,10 +121,13 @@ int main() {
 
 
 	Room_1->ShowAllHumans();
+	std::cout << '\n';
+	Room_1->DelHuman("Светлана");
+	Room_1->ShowAllHumans();
 
 
-	Human::ShowCountHuman();
-
+	//Human::ShowCountHuman();
+	
 
 
 	return 0;
