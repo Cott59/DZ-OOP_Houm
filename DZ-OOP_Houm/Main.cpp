@@ -11,7 +11,7 @@ private:
 	std::string _Name = "";
 	std::string _Second_Name = "";
 	int _Age = 0;
-	//static int _CountHuman;
+	static int _CountHuman;
 
 public:
 	
@@ -19,12 +19,12 @@ public:
 		_Name = name;
 		_Second_Name = second_name;
 		_Age = age;
-		// Add_count_human();
-		std::cout << "Create_Hum" << '\n';
+		//Add_count_human();
+		//std::cout << "Create_Hum" << '\n';
 	}
 	~Human() {
 		// Delete_count_human();
-		std::cout << "Del_Hum" << '\n';
+		//std::cout << "Del_Hum" << '\n';
 	}
 	
 	void ShowDataHuman() {
@@ -33,15 +33,15 @@ public:
 	std::string GetName() { return _Name; }
 	std::string GetSecond_Name() { return _Second_Name; }
 	int GetAge() { return _Age; }
-	/*static void Add_count_human() {
+	/*void Add_count_human() {
 		_CountHuman++;
-	}
-	static void Delete_count_human() {
+	}*/
+	/*static void Delete_count_human() {
 		_CountHuman--;
-	}
+	}*/
 	static void ShowCountHuman() {
 		std::cout << _CountHuman << std::endl;
-	}*/
+	}
 
 };
 
@@ -60,35 +60,43 @@ public:
 		_Humans.push_back(*human);
 	}
 	std::vector<Human>::iterator H = _Humans.begin();
+
 	void ShowAllHumans() {
-		/*for (auto H : _Humans)
-			H.ShowDataHuman();*/
 		for (auto i = _Humans.begin(); i != _Humans.end(); i++) {
 			i->ShowDataHuman();
 		}
 	}
 	void DelAllHuman() {
-		for (auto H : _Humans)
-			H.~Human();
+		for (auto i = _Humans.begin(); i != _Humans.end(); i++) {
+			_Humans.erase(i);
+			
+		}
 	}
 	void DelHuman(std::string str) {
-		for (auto H : _Humans) {
-			if (H.GetName() == str){
-				//_Humans.erase(_Humans);            
+		for (auto i = _Humans.begin(); i != _Humans.end(); i++) {
+			if (i->GetName() == str){
+				_Humans.erase(i);
+				i--;
 			}
-			if (H.GetSecond_Name() == str)
-				H.~Human();
+			if (i->GetSecond_Name() == str) {
+				_Humans.erase(i);
+				i--;
+			}
 		}
 	}
 	void DelHuman(int num) {
 		/*for (auto H : _Humans) {
-			if (H.GetAge() == num)
-				H.~Human();
+			if (H.GetAge() == num) {
+				_Humans.erase(H);
+				H--;
+			}
 		}*/
-		for (auto i = _Humans.begin(); i != _Humans.end(); i++) {
-			if (i->GetAge() == num)
+		for (auto i = _Humans.begin(); i != _Humans.end(); ++i) {
+			if (i->GetAge() == num) {
 				_Humans.erase(i);
-
+				i++;
+				continue;
+			}
 		}
 	}
 };
@@ -130,12 +138,12 @@ int main() {
 
 	Room_1->ShowAllHumans();
 	std::cout << '\n';
-	Room_1->DelHuman(35);
+	Room_1->DelHuman(47);
 	Room_1->ShowAllHumans();
 	
 
 
-	//Human::ShowCountHuman();
+
 	
 
 
